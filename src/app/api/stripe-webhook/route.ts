@@ -9,8 +9,8 @@ const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
-if (!stripeSecretKey || !webhookSecret) {
-  throw new Error('Stripe keys are not configured')
+if (!stripeSecretKey) {
+  throw new Error('Stripe secret key is not configured')
 }
 if (!supabaseUrl || !supabaseServiceKey) {
   throw new Error('Supabase service config missing')
@@ -21,11 +21,16 @@ const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey)
 
 export async function POST(req: Request) {
   const body = await req.text()
-  const headerList = await headers() // app router: headers() returns a Promise
+  const headerList = await headers()
   const sig = headerList.get('stripe-signature')
 
   if (!sig) {
     return NextResponse.json({ error: 'Missing stripe-signature' }, { status: 400 })
+  }
+
+  if (!webhookSecret) {
+    console.error('STRIPE_WEBHOOK_SECRET is not set')
+    return NextResponse.json({ error: 'Webhook not configured' }, { status: 500 })
   }
 
   let event: Stripe.Event
