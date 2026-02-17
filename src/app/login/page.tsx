@@ -24,15 +24,18 @@ export default function LoginPage() {
         password: formData.password,
       })
 
+      console.log('LOGIN RESULT', { data, error }) // for debugging on live site
+
       if (error) throw error
 
       if (data.user) {
-        // Send logged-in users to the *member* dashboard
+        // Logged-in user: go to member dashboard
         router.push('/member/dashboard')
       } else {
         setError('Login did not return a user. Please check your email and password.')
       }
     } catch (err: any) {
+      console.error('LOGIN ERROR', err)
       setError(err.message || 'Login failed. Please check your email and password.')
     } finally {
       setLoading(false)
