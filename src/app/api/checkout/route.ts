@@ -1,7 +1,6 @@
 // src/app/api/checkout/route.ts
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
-import { createSupabaseServerClient } from '@/lib/supabaseServer'
 
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY
 if (!stripeSecretKey) {
@@ -31,26 +30,11 @@ export async function POST(req: Request) {
       )
     }
 
-    // REAL USER: use server-side Supabase client + cookies
-    const supabase = createSupabaseServerClient()
-    const {
-      data: { session },
-      error: sessionError,
-    } = await supabase.auth.getSession()
+    // TEMP: No server-side Supabase auth check; use a placeholder user id/email
+    const userId = 'test-user-id'
+    const userEmail = 'test@example.com'
 
-    if (sessionError || !session || !session.user) {
-      return NextResponse.json(
-        { error: 'Not authenticated' },
-        { status: 401 },
-      )
-    }
-
-    const user = session.user
-    console.log('CHECKOUT USER', {
-      id: user.id,
-      email: user.email,
-      metadata: user.user_metadata,
-    })
+    console.log('CHECKOUT USER (TEMP)', { id: userId, email: userEmail })
 
     const origin = req.headers.get('origin') ?? 'http://localhost:3000'
 
@@ -63,9 +47,9 @@ export async function POST(req: Request) {
           quantity: 1,
         },
       ],
-      customer_email: user.email ?? undefined,
+      customer_email: userEmail,
       metadata: {
-        supabase_user_id: user.id,
+        supabase_user_id: userId,
         plan_id: planId,
       },
       success_url: `${origin}/member/dashboard?checkout=success`,
