@@ -17,7 +17,7 @@ if (!supabaseUrl || !supabaseServiceKey) {
 }
 
 const stripe = new Stripe(stripeSecretKey as string)
-const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey)
+const supabaseAdmin = createClient(supabaseUrl as string, supabaseServiceKey as string)
 
 export async function POST(req: Request) {
   const body = await req.text()
@@ -46,8 +46,12 @@ export async function POST(req: Request) {
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object as Stripe.Checkout.Session
 
+      console.log('WEBHOOK SESSION METADATA', session.metadata)
+
       const supabaseUserId = session.metadata?.supabase_user_id
       const planId = session.metadata?.plan_id
+
+      console.log('WEBHOOK USER', { supabaseUserId, planId, sessionId: session.id })
 
       if (!supabaseUserId || !planId) {
         console.warn('Missing supabase_user_id or plan_id in session metadata', session.id)
@@ -73,6 +77,8 @@ export async function POST(req: Request) {
 
       if (error) {
         console.error('Error updating user after checkout:', error)
+      } else {
+        console.log('Updated user metadata for', supabaseUserId)
       }
     }
 

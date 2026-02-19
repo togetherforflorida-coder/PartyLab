@@ -12,12 +12,18 @@ const stripe = new Stripe(stripeSecretKey as string)
 export async function POST(req: Request) {
   try {
     const body = await req.json()
-    const { planId } = body as { planId?: string }
+    const { planId, userId } = body as { planId?: string; userId?: string }
 
-    // For this test, we only support the 7-day trial plan
     if (planId !== 'trial') {
       return NextResponse.json(
         { error: 'Only the 7-day trial plan is enabled for testing.' },
+        { status: 400 },
+      )
+    }
+
+    if (!userId) {
+      return NextResponse.json(
+        { error: 'Missing userId in request body' },
         { status: 400 },
       )
     }
@@ -30,15 +36,10 @@ export async function POST(req: Request) {
       )
     }
 
-    // TEMP: No server-side Supabase auth check; use a placeholder user id/email
-    const userId = 'test-user-id'
-    const userEmail = 'test@example.com'
-
-    console.log('CHECKOUT USER (TEMP)', { id: userId, email: userEmail })
+    console.log('CHECKOUT REQUEST', { userId, planId })
 
     const origin = req.headers.get('origin') ?? 'http://localhost:3000'
 
-    // One-time payment for the trial (test mode)
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: 'payment',
       line_items: [
@@ -47,7 +48,6 @@ export async function POST(req: Request) {
           quantity: 1,
         },
       ],
-      customer_email: userEmail,
       metadata: {
         supabase_user_id: userId,
         plan_id: planId,

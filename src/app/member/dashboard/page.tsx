@@ -2,7 +2,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { supabaseBrowser } from '@/lib/supabaseClient'
 import {
@@ -25,6 +25,9 @@ type MembershipInfo = {
 
 export default function MemberDashboardPage() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const checkoutStatus = searchParams.get('checkout')
+
   const [user, setUser] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [membership, setMembership] = useState<MembershipInfo>({
@@ -35,27 +38,28 @@ export default function MemberDashboardPage() {
 
   useEffect(() => {
     const load = async () => {
-      const {
-        data: { session },
-        error,
-      } = await supabaseBrowser.auth.getSession()
+      // Always fetch the freshest user, not just the cached session
+      const { data, error } = await supabaseBrowser.auth.getUser()
 
       if (error) {
-        console.error('Error getting session', error)
+        console.error('Error getting user', error)
       }
 
-      // Not logged in → go to login
-      if (!session || !session.user) {
+      if (!data.user) {
         router.push('/login')
         return
       }
 
-      const u = session.user
+      const u = data.user
       const meta = u.user_metadata || {}
+
+      console.log('DASHBOARD META', meta)
 
       // Membership gating
       const status: string = meta.subscription_status || 'inactive'
       const accessUntil: string | null = meta.access_until || null
+
+      console.log('GATE STATUS', { status, accessUntil })
 
       let hasAccess = false
       if (status === 'active') {
@@ -69,7 +73,6 @@ export default function MemberDashboardPage() {
       }
 
       if (!hasAccess) {
-        // Logged in but not an active member → send to upgrade page
         router.push('/member/upgrade')
         return
       }
@@ -98,7 +101,7 @@ export default function MemberDashboardPage() {
     }
 
     load()
-  }, [router])
+  }, [router, checkoutStatus])
 
   const handleLogout = async () => {
     await supabaseBrowser.auth.signOut()

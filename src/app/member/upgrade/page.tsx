@@ -1,8 +1,9 @@
 // src/app/member/upgrade/page.tsx
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { supabaseBrowser } from '@/lib/supabaseClient'
 
 const TRIAL_PLAN = {
   id: 'trial',
@@ -14,25 +15,47 @@ export default function UpgradePage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [userId, setUserId] = useState<string | null>(null)
+
+  useEffect(() => {
+    const loadUser = async () => {
+      const { data, error } = await supabaseBrowser.auth.getUser()
+      if (error) {
+        console.error('Error getting user in upgrade page', error)
+        return
+      }
+      if (data.user) {
+        setUserId(data.user.id)
+      } else {
+        router.push('/login')
+      }
+    }
+    loadUser()
+  }, [router])
 
   const handleCheckout = async () => {
     setError(null)
+
+    if (!userId) {
+      setError('No user ID available. Please log in again.')
+      return
+    }
+
     setLoading(true)
     try {
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ planId: TRIAL_PLAN.id }),
+        body: JSON.stringify({ planId: TRIAL_PLAN.id, userId }),
       })
 
       const data = await res.json()
-      console.log('CHECKOUT RESPONSE', { status: res.status, data }) // log for debugging
+      console.log('CHECKOUT RESPONSE', { status: res.status, data })
 
       if (!res.ok || !data.url) {
         throw new Error(data.error || 'Failed to create checkout session.')
       }
 
-      // Redirect to Stripe Checkout
       window.location.href = data.url
     } catch (err: any) {
       console.error(err)
