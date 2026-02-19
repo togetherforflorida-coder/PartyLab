@@ -2,7 +2,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { supabaseBrowser } from '@/lib/supabaseClient'
 import {
@@ -25,9 +25,6 @@ type MembershipInfo = {
 
 export default function MemberDashboardPage() {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const checkoutStatus = searchParams.get('checkout')
-
   const [user, setUser] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [membership, setMembership] = useState<MembershipInfo>({
@@ -101,7 +98,7 @@ export default function MemberDashboardPage() {
     }
 
     load()
-  }, [router, checkoutStatus])
+  }, [router])
 
   const handleLogout = async () => {
     await supabaseBrowser.auth.signOut()
