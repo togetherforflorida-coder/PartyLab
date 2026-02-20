@@ -1,3 +1,4 @@
+// src/app/themes/page.tsx
 'use client'
 
 import { useState, useMemo } from 'react'
@@ -8,8 +9,9 @@ type ThemeItem = {
   name: string
   emoji: string
   category: string
-  status: 'demo' | 'members' | 'coming-soon'
+  status: 'demo-preview' | 'preview' | 'coming-soon'
   blurb: string
+  href: string
 }
 
 const themes: ThemeItem[] = [
@@ -18,40 +20,71 @@ const themes: ThemeItem[] = [
     name: 'Game Night Party',
     emoji: '🎮',
     category: 'At-Home / Cozy',
-    status: 'demo',
-    blurb: 'Couch co‑op, quick tournaments, snacks, and cozy options for 4–12 guests.',
+    status: 'demo-preview',
+    blurb:
+      'Couch co‑op, quick tournaments, snacks, playlists, and cozy options for solo, group, online, and ND‑friendly play.',
+    href: '/themes/game-night-preview',
   },
   {
-    slug: 'super-bowl',
-    name: 'Big Game Football Party',
+    slug: 'movies-tv',
+    name: 'Movies & TV Watch Nights',
+    emoji: '🎬',
+    category: 'At-Home / Cozy',
+    status: 'preview',
+    blurb:
+      'Watch parties, premieres, finales, and binge sessions with pacing, snacks, and genre‑specific rituals.',
+    href: '/themes/movies-preview',
+  },
+  {
+    slug: 'sports-parties',
+    name: 'Sports Parties & Game Days',
     emoji: '🏈',
     category: 'Sports',
-    status: 'members',
-    blurb: 'Team-color snacks, watch party timeline, and game‑day side activities.',
+    status: 'preview',
+    blurb:
+      'Game days, finals, drafts and tournament runs with brackets, fantasy mini‑leagues, and tailgate‑style spreads.',
+    href: '/themes/sports-preview',
   },
   {
+    slug: 'kids-family',
+    name: 'Kids & Family Nights',
+    emoji: '🧩',
+    category: 'Kids & Family',
+    status: 'preview',
+    blurb:
+      'Family game nights, movie nights, and rituals with age‑aware games, parallel play, and ND‑friendly tweaks.',
+    href: '/themes/kids-family-preview',
+  },
+  {
+    slug: 'holidays',
+    name: 'Holiday Gatherings',
+    emoji: '🎄',
+    category: 'Holidays',
+    status: 'preview',
+    blurb:
+      'Blueprints for holidays like New Year’s, Valentine’s, Easter, Pride, Halloween, Thanksgiving, and winter holidays.',
+    href: '/themes/holidays-preview',
+  },
+  {
+    slug: 'religious-spiritual',
+    name: 'Religious & Spiritual Evenings',
+    emoji: '🕯️',
+    category: 'Faith & Family',
+    status: 'preview',
+    blurb:
+      'Gentle, mixed‑belief‑aware nights of reflection, prayer, meditation, or light‑based rituals you can adapt to your path.',
+    href: '/themes/religious-preview',
+  },
+  // A few roadmap ideas to show breadth
+  {
     slug: 'birthday-bash',
-    name: 'Birthday Bash',
+    name: 'Birthday Bash (Kids & Adults)',
     emoji: '🎂',
     category: 'Birthdays',
     status: 'coming-soon',
-    blurb: 'Flexible birthday template for kids, adults, and milestone ages.',
-  },
-  {
-    slug: 'holiday-cozy-christmas',
-    name: 'Cozy Christmas Night In',
-    emoji: '🎄',
-    category: 'Holidays',
-    status: 'coming-soon',
-    blurb: 'Warm drinks, simple crafts, and low‑stress holiday hosting ideas.',
-  },
-  {
-    slug: 'faith-and-food',
-    name: 'Faith & Food Family Night',
-    emoji: '🙏',
-    category: 'Faith & Family',
-    status: 'coming-soon',
-    blurb: 'Gentle family nights combining simple recipes with reflection prompts.',
+    blurb:
+      'Flexible birthday templates for kids, adults, and milestones—with options for low‑sensory and ND‑friendly celebrations.',
+    href: '/themes', // placeholder until a dedicated preview exists
   },
   {
     slug: 'bachelorette-night',
@@ -59,7 +92,19 @@ const themes: ThemeItem[] = [
     emoji: '🍷',
     category: 'Adult 18+',
     status: 'coming-soon',
-    blurb: 'Spa, games, and celebration ideas that work at home or a rental.',
+    blurb:
+      'Spa, games, and celebration ideas that work at home or a rental, with multiple “spice levels” and consent‑first framing.',
+    href: '/themes',
+  },
+  {
+    slug: 'faith-and-food',
+    name: 'Faith & Food Family Night',
+    emoji: '🙏',
+    category: 'Faith & Family',
+    status: 'coming-soon',
+    blurb:
+      'Gentle family nights that blend simple recipes with stories, gratitude, and optional scripture or spiritual readings.',
+    href: '/themes',
   },
 ]
 
@@ -69,6 +114,7 @@ const categories = [
   'Sports',
   'Birthdays',
   'Holidays',
+  'Kids & Family',
   'Faith & Family',
   'Adult 18+',
 ]
@@ -78,7 +124,7 @@ export default function ThemesPage() {
   const [activeCategory, setActiveCategory] = useState<string>('All')
 
   const filteredThemes = useMemo(() => {
-    return themes.filter(theme => {
+    return themes.filter((theme) => {
       const matchesCategory =
         activeCategory === 'All' || theme.category === activeCategory
 
@@ -99,7 +145,8 @@ export default function ThemesPage() {
             🎉 Browse Party Themes
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            This is a living catalog. Game Night is fully demoed; others are being built and will unlock with your membership.
+            This is a living catalog. Game Night and our main categories have preview pages so you can see how themes
+            will work; full paid blueprints will unlock more detail over time.
           </p>
         </div>
 
@@ -110,7 +157,7 @@ export default function ThemesPage() {
             <input
               type="text"
               value={search}
-              onChange={e => setSearch(e.target.value)}
+              onChange={(e) => setSearch(e.target.value)}
               placeholder="Search themes by name, category, or vibe..."
               className="w-full bg-black/40 text-gray-100 px-4 py-3 rounded-full border border-purple-700/50 focus:border-purple-400 focus:outline-none text-sm placeholder:text-gray-500"
             />
@@ -118,7 +165,7 @@ export default function ThemesPage() {
 
           {/* Categories */}
           <div className="flex flex-wrap gap-3 justify-center text-sm">
-            {categories.map(cat => {
+            {categories.map((cat) => {
               const isActive = activeCategory === cat
               return (
                 <button
@@ -142,13 +189,14 @@ export default function ThemesPage() {
         {/* Themes grid */}
         {filteredThemes.length === 0 ? (
           <div className="text-center text-gray-300 text-sm py-12">
-            No themes match your search yet. Try a different keyword, or tell us what you&apos;d like on the homepage IP survey.
+            No themes match your search yet. Try a different keyword, or tell us what you&apos;d like on the homepage IP
+            survey.
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {filteredThemes.map(theme => {
-              const isDemo = theme.status === 'demo'
-              const isMembers = theme.status === 'members'
+            {filteredThemes.map((theme) => {
+              const isDemoPreview = theme.status === 'demo-preview'
+              const isPreview = theme.status === 'preview'
               const isComing = theme.status === 'coming-soon'
 
               return (
@@ -164,14 +212,14 @@ export default function ThemesPage() {
                         <p className="text-xs text-purple-300">{theme.category}</p>
                       </div>
                     </div>
-                    {isDemo && (
+                    {isDemoPreview && (
                       <span className="text-[10px] px-2 py-1 rounded-full bg-emerald-500 text-slate-900 font-bold">
-                        DEMO
+                        DEMO PREVIEW
                       </span>
                     )}
-                    {isMembers && (
+                    {isPreview && (
                       <span className="text-[10px] px-2 py-1 rounded-full bg-blue-500 text-slate-900 font-bold">
-                        MEMBERS
+                        PREVIEW
                       </span>
                     )}
                     {isComing && (
@@ -184,13 +232,13 @@ export default function ThemesPage() {
                   <p className="text-sm text-gray-300 mb-4">{theme.blurb}</p>
 
                   {/* Call-to-action area */}
-                  {isDemo && (
+                  {isDemoPreview && (
                     <div className="flex flex-col space-y-2">
                       <Link
-                        href="/preview/game-night"
+                        href={theme.href}
                         className="w-full text-center bg-white/10 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-white/20 transition-all border border-white/20"
                       >
-                        View Demo Theme
+                        View Game Night Demo
                       </Link>
                       <Link
                         href="/signup"
@@ -201,27 +249,28 @@ export default function ThemesPage() {
                     </div>
                   )}
 
-                  {isMembers && (
+                  {isPreview && (
                     <div className="space-y-2 text-sm">
-                      <p className="text-xs text-gray-400">
-                        Full theme includes recipes, drinks, games, crafts, and shopping lists.
-                      </p>
                       <Link
-                        href="/signup"
+                        href={theme.href}
                         className="block text-center bg-white/10 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-white/20 transition-all border border-white/20"
                       >
-                        Login or Join to Unlock
+                        Explore This Theme Preview
                       </Link>
+                      <p className="text-xs text-gray-400">
+                        Paid versions will add full blueprints: recipes, games, decor, scripts, and optional kits.
+                      </p>
                     </div>
                   )}
 
                   {isComing && (
                     <div className="space-y-2 text-sm">
                       <p className="text-xs text-gray-400">
-                        This theme is on our build list. Your membership helps us bring it online faster.
+                        This theme is on our build list. Your membership and IP feedback help us decide what to finish
+                        first.
                       </p>
                       <Link
-                        href="/preview/game-night"
+                        href="/themes/game-night-preview"
                         className="block text-center bg-white/5 text-gray-200 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-white/15 transition-all border border-white/10"
                       >
                         See How Themes Will Look
@@ -241,7 +290,8 @@ export default function ThemesPage() {
               Want a specific theme or IP?
             </h3>
             <p className="text-gray-300 text-sm mb-4">
-              Tell us what you want on the homepage survey—sports teams, shows, fandoms—and we&apos;ll factor it into our licensing roadmap.
+              Tell us what you want on the homepage survey—sports teams, shows, fandoms—and we&apos;ll factor it into
+              our licensing and build roadmap.
             </p>
             <Link
               href="/#ip-interest"

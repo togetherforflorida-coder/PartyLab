@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Sparkles, Check, Gift, ArrowRight, CalendarDays, MapPin, Bookmark } from 'lucide-react'
+import { Sparkles, Check, Gift, ArrowRight, CalendarDays, MapPin } from 'lucide-react'
 
 type EventCard = {
   id: string
@@ -42,10 +42,10 @@ const upcomingEvents: EventCard[] = [
   {
     id: 'glitched-launch',
     name: 'Glitched Launch: Mystery Dinner Beta',
-    date: 'Coming 2025',
-    location: 'At‑Home or Small Groups • Hybrid',
+    date: 'Coming 2026',
+    location: 'At‑Home or Small Groups • Live Online',
     description:
-      'A story‑driven “glitch in the system” mystery dinner: character packets, digital clues, props, and prompts that slowly reveal what’s gone wrong behind the scenes.',
+      'A live mystery dinner where a high‑stakes launch is sabotaged. Your group plays along as the story unfolds, collecting clues and locking in guesses about who did it, why, and how.',
     tag: 'Mystery Dinner & Story Night',
     href: '/events/glitched-launch',
     accent: 'pink',
@@ -78,7 +78,8 @@ export default function HomePage() {
                 PartyLab • Party Laboratory
               </p>
               <p className="text-[11px] text-gray-300">
-                Where recipes, games, decor & vibes get tested like experiments—so you don&apos;t have to wing it.
+                Where recipes, games, decor, rituals &amp; vibes get tested like experiments—so you don&apos;t have to
+                wing it.
               </p>
             </div>
           </div>
@@ -103,22 +104,23 @@ export default function HomePage() {
               <div className="flex items-center space-x-3 mb-4">
                 <Sparkles className="w-6 h-6 text-yellow-400" />
                 <span className="text-xs font-semibold tracking-[0.2em] text-purple-100 uppercase">
-                  PLAN • PARTY • REPEAT
+                  PLAN • PARTY • LAB • REPEAT
                 </span>
               </div>
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">
                 Turn Any Obsession
                 <span className="block bg-gradient-to-r from-pink-400 via-yellow-300 to-purple-400 bg-clip-text text-transparent mt-2">
-                  Into a Party Blueprint
+                  Into Nights Worth Repeating
                 </span>
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-4 max-w-xl">
-                PartyLab gives you themed “blueprints” for parties, cozy nights in, and live events inspired by the
+              <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-3 max-w-xl">
+                PartyLab is a planning lab for parties, cozy nights in, and hosted experiences inspired by the
                 things you love—movies, shows, sports, holidays, fandoms, faith, and more.
               </p>
               <p className="text-sm text-gray-300 mb-4 max-w-md">
-                Get recipes, games, decor ideas, playlists, printables, and hosting notes—tested in our lab before they
-                land in your living room.
+                You&apos;ll find **themes and blueprints** for at‑home nights, plus growing sets of **Labs** (dating,
+                social media, cooking, study, nightlife) and **hosted events** like Pulse 10, America 250, and Glitched
+                Launch.
               </p>
 
               <div className="inline-flex items-center space-x-3 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 backdrop-blur px-4 py-2 rounded-full border border-yellow-500/30">
@@ -148,11 +150,11 @@ export default function HomePage() {
                   <ul className="space-y-1 text-gray-100 text-xs">
                     <li className="flex items-start space-x-2">
                       <Check className="w-3 h-3 text-green-300 mt-0.5" />
-                      <span>3 months of full access to all themes</span>
+                      <span>3 months of full access to all current themes</span>
                     </li>
                     <li className="flex items-start space-x-2">
                       <Check className="w-3 h-3 text-green-300 mt-0.5" />
-                      <span>Lock in founding member benefits</span>
+                      <span>Early invites &amp; better pricing on many live events</span>
                     </li>
                   </ul>
                 </div>
@@ -182,7 +184,7 @@ export default function HomePage() {
                     </li>
                     <li className="flex items-start space-x-2">
                       <Check className="w-3 h-3 text-green-400 mt-0.5" />
-                      <span>Recipes, games, decor ideas & hosting notes</span>
+                      <span>Recipes, games, decor ideas &amp; hosting notes</span>
                     </li>
                   </ul>
                 </div>
@@ -218,7 +220,7 @@ export default function HomePage() {
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-6">
             <div>
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                Upcoming Hosted Events & Live Experiences
+                Upcoming Hosted Events &amp; Live Experiences
               </h2>
               <p className="text-sm text-gray-300 max-w-xl">
                 Join bigger experiences—from memorials and block parties to mystery dinners—that connect you with
@@ -310,7 +312,8 @@ export default function HomePage() {
             </h2>
             <p className="text-sm md:text-lg text-gray-300 max-w-3xl mx-auto">
               PartyLab is a theme engine and planning lab. You tell us the vibe—Super Bowl, cozy game night, bachelorette,
-              faith‑family dinner, fandom watch party—and we hand you a blueprint you can actually run.
+              faith‑family dinner, fandom watch party—and we hand you a blueprint you can actually run, plus Labs and
+              events that keep evolving over time.
             </p>
           </div>
 
@@ -327,8 +330,8 @@ export default function HomePage() {
                 icon: '📋',
               },
               {
-                title: 'Run It Your Way',
-                desc: 'Use what you already own, print things at home, or order kits and custom items as we grow.',
+                title: 'Layer in Labs & Events',
+                desc: 'Use Labs and hosted experiences as extra experiments for dating, studying, social media, nightlife, and more.',
                 icon: '🎉',
               },
             ].map((item, i) => (
@@ -343,35 +346,35 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* Popular Themes from your original page */}
+          {/* Popular themes callout */}
           <div className="text-center mb-8">
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
               Themes You&apos;ll Find in PartyLab
             </h3>
             <p className="text-sm md:text-base text-gray-300 max-w-3xl mx-auto">
-              Start with big buckets like sports, holidays, kids & ND‑friendly, adult evenings, and faith & family.
+              Start with big buckets like sports, holidays, kids &amp; ND‑friendly, adult evenings, and faith &amp; family.
               We&apos;ll keep layering in fandoms, live events, and special experiences as we grow.
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
             {[
-              { name: 'Sports Parties', emoji: '🏈', note: 'Super Bowl, finals, game days' },
-              { name: 'Movies & TV', emoji: '🎬', note: 'Movie marathons & watch parties' },
+              { name: 'Sports Parties', emoji: '🏈', note: 'Super Bowl, finals, big games' },
+              { name: 'Movies & TV', emoji: '🎬', note: 'Watch parties & premieres' },
               { name: 'Holidays', emoji: '🎄', note: 'Christmas, Halloween, NYE & more' },
               { name: 'Birthdays', emoji: '🎂', note: 'Kids, adults & milestones' },
-              { name: 'Game Night', emoji: '🎮', note: 'Cozy couch co‑op & tournaments' },
-              { name: 'Adult 18+', emoji: '🍷', note: 'Bachelorette, date nights & more' },
-              { name: 'Faith & Family', emoji: '🙏', note: 'Gentle faith‑friendly nights' },
+              { name: 'Game Night', emoji: '🎮', note: 'Board games, video games, cozy nights' },
+              { name: 'Adult 18+', emoji: '🍷', note: 'Bachelorette, spa nights, date nights' },
+              { name: 'Faith & Family', emoji: '🙏', note: 'Gentle faith‑friendly rituals' },
               { name: 'Kids & ND‑Friendly', emoji: '🧩', note: 'Lower‑sensory options' },
             ].map((cat, i) => (
               <div
                 key={i}
                 className="bg-gradient-to-br from-purple-900/50 to-indigo-900/50 backdrop-blur p-6 rounded-2xl border border-purple-700/30 hover:border-purple-500/60 transition-all hover:scale-[1.02]"
               >
-                <div className="text-4xl mb-3">{cat.emoji}</div>
-                <h3 className="text-lg font-bold text-white mb-1">{cat.name}</h3>
-                <p className="text-gray-300 text-xs">{cat.note}</p>
+                <div className="text-3xl mb-3">{cat.emoji}</div>
+                <h4 className="text-sm font-bold text-white mb-1">{cat.name}</h4>
+                <p className="text-gray-300 text-[11px]">{cat.note}</p>
               </div>
             ))}
           </div>
@@ -384,6 +387,120 @@ export default function HomePage() {
               <span>Browse All Themes</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Labs Coming to PartyLab (moved up under What is PartyLab) */}
+      <section className="py-20 bg-black/55">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+              Labs Coming to PartyLab
+            </h2>
+            <p className="text-sm md:text-base text-gray-300 max-w-3xl mx-auto">
+              In addition to themes and blueprints, PartyLab Labs are focused spaces where we prototype ideas for dating,
+              meetups, social media, cooking, studying, nightlife, and more. Each Lab explores how to turn a part of your
+              life into a repeatable ritual or gathering.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-200">
+            {/* Dating & Meetup Lab */}
+            <div className="bg-gradient-to-br from-purple-900/50 to-indigo-900/50 backdrop-blur p-6 rounded-2xl border border-purple-700/30">
+              <h3 className="text-lg font-bold text-white mb-2">Dating &amp; Meetup Lab</h3>
+              <p className="text-sm text-gray-300 mb-3">
+                Experiments in safer, more intentional dating and friend‑finding: verified users, first‑date formats,
+                group outings, and education around scammers and groomers.
+              </p>
+              <Link
+                href="/dating-meetups"
+                className="inline-flex items-center space-x-1 text-xs text-purple-200 hover:text-purple-100 underline underline-offset-2"
+              >
+                <span>Learn more about the Dating &amp; Meetup Lab</span>
+                <span>→</span>
+              </Link>
+            </div>
+
+            {/* Social Media Lab */}
+            <div className="bg-gradient-to-br from-blue-900/50 to-slate-900/50 backdrop-blur p-6 rounded-2xl border border-blue-700/40">
+              <h3 className="text-lg font-bold text-white mb-2">Social Media Lab</h3>
+              <p className="text-sm text-gray-300 mb-3">
+                Content nights, post‑together sessions, and boundary experiments to make being online feel more
+                intentional and less like a doomscroll.
+              </p>
+              <Link
+                href="/social-media"
+                className="inline-flex items-center space-x-1 text-xs text-blue-200 hover:text-blue-100 underline underline-offset-2"
+              >
+                <span>Learn more about the Social Media Lab</span>
+                <span>→</span>
+              </Link>
+            </div>
+
+            {/* Cooking Lab */}
+            <div className="bg-gradient-to-br from-amber-900/40 to-rose-900/40 backdrop-blur p-6 rounded-2xl border border-amber-600/40">
+              <h3 className="text-lg font-bold text-white mb-2">Cooking Lab</h3>
+              <p className="text-sm text-gray-300 mb-3">
+                Co‑created recipes, cook‑along nights, kid‑friendly kitchen experiments, and rituals that make &quot;what
+                are we eating&quot; feel less like a chore and more like a shared experiment.
+              </p>
+              <Link
+                href="/cooking-lab"
+                className="inline-flex items-center space-x-1 text-xs text-amber-200 hover:text-amber-100 underline underline-offset-2"
+              >
+                <span>Learn more about the Cooking Lab</span>
+                <span>→</span>
+              </Link>
+            </div>
+
+            {/* Study Party Lab */}
+            <div className="bg-gradient-to-br from-indigo-900/50 to-slate-900/50 backdrop-blur p-6 rounded-2xl border border-indigo-700/40">
+              <h3 className="text-lg font-bold text-white mb-2">Study Party Lab</h3>
+              <p className="text-sm text-gray-300 mb-3">
+                Focus blocks, body‑doubling, and &quot;study party&quot; formats for students, remote workers, and
+                anyone with ADHD/ND brains trying to get things done without burning out.
+              </p>
+              <Link
+                href="/study-lab"
+                className="inline-flex items-center space-x-1 text-xs text-indigo-200 hover:text-indigo-100 underline underline-offset-2"
+              >
+                <span>Learn more about the Study Party Lab</span>
+                <span>→</span>
+              </Link>
+            </div>
+
+            {/* Music & Nightlife Lab */}
+            <div className="bg-gradient-to-br from-fuchsia-900/50 to-purple-900/50 backdrop-blur p-6 rounded-2xl border border-fuchsia-700/40">
+              <h3 className="text-lg font-bold text-white mb-2">Music &amp; Nightlife Lab</h3>
+              <p className="text-sm text-gray-300 mb-3">
+                Home‑scale nightlife experiments: DJ nights, listening parties, tiny dance floors, and queer‑/ND‑friendly
+                alternatives to conventional clubs and bars.
+              </p>
+              <Link
+                href="/music-nightlife"
+                className="inline-flex items-center space-x-1 text-xs text-fuchsia-200 hover:text-fuchsia-100 underline underline-offset-2"
+              >
+                <span>Learn more about the Music &amp; Nightlife Lab</span>
+                <span>→</span>
+              </Link>
+            </div>
+
+            {/* Labs overview */}
+            <div className="bg-black/40 backdrop-blur p-6 rounded-2xl border border-purple-700/40">
+              <h3 className="text-lg font-bold text-white mb-2">Labs Overview</h3>
+              <p className="text-sm text-gray-300 mb-3">
+                An overview page tying all the Labs together—how they relate to themes, membership, hosted events, and
+                the broader PartyLab roadmap.
+              </p>
+              <Link
+                href="/labs"
+                className="inline-flex items-center space-x-1 text-xs text-purple-200 hover:text-purple-100 underline underline-offset-2"
+              >
+                <span>Visit the Labs overview (coming soon)</span>
+                <span>→</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
