@@ -1,5 +1,8 @@
 // src/app/events/page.tsx
+'use client'
+
 import Link from 'next/link'
+import { CalendarDays, MapPin, ArrowRight, Ticket, Sparkles } from 'lucide-react'
 
 export default function EventsPage() {
   return (
@@ -8,14 +11,14 @@ export default function EventsPage() {
         {/* Header */}
         <header className="text-center space-y-4">
           <p className="text-sm text-gray-400 uppercase tracking-[0.2em]">
-            Hosted Events & Live Experiences
+            Hosted Events &amp; Live Experiences
           </p>
           <h1 className="text-4xl md:text-5xl font-bold text-white">
             Join Us for Shared Moments
           </h1>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
             In addition to at‑home party blueprints, PartyLab will host live and virtual events you can join from anywhere—
-            memorials, block parties, dinner theatre nights, murder mysteries, and more.
+            memorials, block parties, dinner theatre nights, mystery experiences, and more.
           </p>
         </header>
 
@@ -23,59 +26,124 @@ export default function EventsPage() {
         <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Pulse 10 */}
           <div className="bg-gradient-to-br from-purple-900/60 to-indigo-900/60 backdrop-blur rounded-2xl p-6 border border-purple-600/40 space-y-3">
-            <h2 className="text-2xl font-bold text-white">
-              Pulse 10: Love &amp; Light Virtual Memorial
-            </h2>
-            <p className="text-xs text-gray-400">Planned for June 12, 2026 • Online Gathering</p>
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-white">
+                Pulse 10: Love &amp; Light Virtual Memorial
+              </h2>
+              <span className="px-2 py-0.5 rounded-full bg-purple-900/80 border border-purple-500/60 text-[10px] uppercase tracking-[0.16em] text-purple-100">
+                Free • Virtual
+              </span>
+            </div>
+            <p className="text-xs text-gray-400">
+              Planned for June 12, 2026 • Online Gathering
+            </p>
             <p className="text-sm text-gray-300">
-              A 10‑year memorial honoring the 49 lives lost at Pulse, holding space for grief, remembrance,
-              and queer resilience. We&apos;re designing a gentle, thoughtful online gathering where you can
-              light a candle at home, join in guided reflection, and connect quietly with others.
+              A free virtual memorial and reflection night on the 10‑year mark of the Pulse tragedy—holding space for
+              grief, remembrance, and queer resilience with guided reflection, candles/light, and quiet ways to
+              participate from home.
             </p>
             <ul className="text-sm text-gray-300 list-disc list-inside space-y-1">
               <li>Guided reflection prompts and optional readings</li>
-              <li>Candle‑lighting ritual you can follow from home</li>
-              <li>Optional at‑home kit to create a small memorial corner</li>
-              <li>All proceeds support an LGBTQ+ sanctuary project vision</li>
+              <li>Candle‑lighting or light rituals you can follow at home</li>
+              <li>Quiet spaces and moderated &quot;Wall of Light&quot; for messages and art</li>
+              <li>No cost to attend; no PartyLab membership required</li>
             </ul>
             <p className="text-xs text-gray-400">
-              This event will respect all faith backgrounds and those with no faith; it&apos;s about memory, not doctrine.
+              Designed to respect many faith backgrounds and those with no faith—centered on memory, not doctrine.
             </p>
             <Link
-              href="/signup"
-              className="inline-block mt-2 bg-white/10 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-white/20 border border-white/20 transition-all"
+              href="/events/pulse-10"
+              className="inline-flex items-center space-x-2 mt-2 bg-white/10 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-white/20 border border-white/20 transition-all"
             >
-              Get Updates on Pulse 10 →
+              <span>Learn More About Pulse 10</span>
+              <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
 
           {/* America 250 */}
           <div className="bg-gradient-to-br from-blue-900/60 to-red-900/60 backdrop-blur rounded-2xl p-6 border border-blue-600/40 space-y-3">
-            <h2 className="text-2xl font-bold text-white">
-              America 250: Virtual Block Party
-            </h2>
-            <p className="text-xs text-gray-400">Planned for July 4, 2026 • Coast‑to‑Coast Celebration</p>
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-white">
+                America 250: Virtual Block Party
+              </h2>
+              <span className="px-2 py-0.5 rounded-full bg-blue-900/80 border border-blue-500/60 text-[10px] uppercase tracking-[0.16em] text-blue-100">
+                Ticketed • $5
+              </span>
+            </div>
+            <p className="text-xs text-gray-400">
+              Planned for July 4, 2026 • Coast‑to‑Coast Celebration
+            </p>
             <p className="text-sm text-gray-300">
-              A July 4th “America 250” celebration you can join from your own porch, living room, or neighborhood.
-              Think printable decorations, playlists, conversation prompts, reflection questions, and optional kits
-              to help you host something that feels like you.
+              A July 4th &quot;America 250&quot; celebration you can join from your own porch, living room, or
+              neighborhood—marking 250 years of the American experiment with playlists, printables, and a joyful
+              &quot;No Kings&quot; pro‑democracy moment.
             </p>
             <ul className="text-sm text-gray-300 list-disc list-inside space-y-1">
               <li>PartyLab‑curated playlists for the day and evening</li>
               <li>Printable decor and signage you can color or customize</li>
               <li>Prompts that acknowledge the complexity of U.S. history</li>
-              <li>Optional food & game kits to keep it simple but special</li>
+              <li>
+                A coordinated &quot;No Kings&quot; moment pushing back against authoritarianism, without endorsing
+                specific candidates
+              </li>
             </ul>
             <p className="text-xs text-gray-400">
               Designed to be inclusive, multi‑faith, multi‑cultural, and accessible for families, friend groups, or solo hosts.
             </p>
             <Link
-              href="/signup"
-              className="inline-block mt-2 bg-white/10 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-white/20 border border-white/20 transition-all"
+              href="/events/america-250"
+              className="inline-flex items-center space-x-2 mt-2 bg-white/10 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-white/20 border border-white/20 transition-all"
             >
-              Get Updates on America 250 →
+              <span>Learn More About America 250</span>
+              <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
+        </section>
+
+        {/* Glitched Launch */}
+        <section className="bg-black/40 backdrop-blur rounded-2xl p-6 border border-purple-700/40 space-y-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="flex items-center space-x-2 mb-1">
+                <Sparkles className="w-4 h-4 text-purple-200" />
+                <h2 className="text-lg sm:text-xl font-bold text-white">
+                  Glitched Launch: Sabotage Mystery Dinner
+                </h2>
+              </div>
+              <p className="text-xs text-gray-300">
+                Live Showcase • Mystery Dinner / Story Night • Ticketed
+              </p>
+            </div>
+            <span className="px-2 py-0.5 rounded-full bg-purple-900/80 border border-purple-500/60 text-[10px] uppercase tracking-[0.16em] text-purple-100">
+              Coming 2026
+            </span>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 text-xs text-gray-300">
+            <span className="inline-flex items-center space-x-1">
+              <CalendarDays className="w-3 h-3" />
+              <span>Date &amp; Time TBA • 2026</span>
+            </span>
+            <span className="inline-flex items-center space-x-1">
+              <MapPin className="w-3 h-3" />
+              <span>Live Online • Host your own dinner at home</span>
+            </span>
+            <span className="inline-flex items-center space-x-1">
+              <Ticket className="w-3 h-3" />
+              <span>Ticketed • Per Guessing Seat (group pricing planned)</span>
+            </span>
+          </div>
+          <p className="text-sm text-gray-200">
+            A live, story‑driven mystery dinner where a high‑stakes launch is sabotaged. Your group plays along as the
+            story unfolds, collecting clues and locking in guesses about who did it, why, and how—showcasing what
+            PartyLab can do with narrative events.
+          </p>
+          <Link
+            href="/events/glitched-launch"
+            className="inline-flex items-center space-x-2 mt-2 bg-white/10 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-white/20 border border-white/20 transition-all"
+          >
+            <span>Learn More About Glitched Launch</span>
+            <ArrowRight className="w-3 h-3" />
+          </Link>
         </section>
 
         {/* Future Formats */}
@@ -97,7 +165,7 @@ export default function EventsPage() {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold text-white mb-2">🎲 Live Game Nights & Trivia</h3>
+              <h3 className="font-semibold text-white mb-2">🎲 Live Game Nights &amp; Trivia</h3>
               <ul className="list-disc list-inside space-y-1">
                 <li>Theme‑based trivia nights (shows, sports seasons, decades, etc.)</li>
                 <li>Interactive party games that work over video or in‑person with a screen</li>
@@ -108,10 +176,10 @@ export default function EventsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-300">
             <div>
-              <h3 className="font-semibold text-white mb-2">🕵️ Murder Mysteries</h3>
+              <h3 className="font-semibold text-white mb-2">🕵️ Mystery Experiences</h3>
               <ul className="list-disc list-inside space-y-1">
                 <li>Printable character packets with roles and secret objectives</li>
-                <li>Optional mailed prop kits (envelopes, clues, little physical items)</li>
+                <li>Optional mailed prop kits (envelopes, clues, physical items)</li>
                 <li>Themed menus and decor suggestions for each story</li>
               </ul>
             </div>
@@ -126,7 +194,7 @@ export default function EventsPage() {
           </div>
 
           <p className="text-xs text-gray-400">
-            These formats will roll out gradually through 2025–2026. Founding members and early subscribers will get early invites and special pricing/bonuses.
+            These formats will roll out gradually through 2026. Founding members and early subscribers will get early invites and special pricing/bonuses.
           </p>
         </section>
 
